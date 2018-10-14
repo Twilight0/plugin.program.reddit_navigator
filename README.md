@@ -51,8 +51,4 @@ Reddit Browser for Kodi is designed to scrape all forms of content: video, live 
 * Youtube addon (provides resolving and dash playback of youtube streams)
 * **Pyxbmct** for windowed display of images and authentication window
 
-**Known issues**:
-
-* Currently save/unsave of items to your reddit account does not work due to a bug on reddit's oauth subdomain.
-
 Artwork kindly provided by **jokstergfx**
