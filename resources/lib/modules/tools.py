@@ -229,9 +229,9 @@ def install_plexus():
 def available_domains(add_operator=True):
 
     reduced_list = [
-        'dailymotion.com', 'googlevideo.com', 'googleusercontent.com', 'googledrive.com', 'googleapis.com',
-        'blogspot.com', 'openload.co', 'vk.com', 'flashx.tv', 'vidoza.net', 'clipwatching.com', 'vidzi.tv', 'estream.nu',
-        'streamango.com', 'oload.download', 'oload.tv', 'oload.stream', 'openload.io', 'drive.google.com', 'tune.pk', 'thevideobee.to'
+        'dailymotion.com', 'docs.google.com', 'drive.google.com', 'estream.nu', 'thevideobee.to', 'streamable.com'
+        'openload.co', 'vk.com', 'flashx.tv', 'vidoza.net', 'clipwatching.com', 'vidzi.tv', 'tune.pk',
+        'streamango.com', 'oload.download', 'oload.tv', 'oload.stream', 'openload.io', 'vshare.io', 'vshare.eu'
     ]
 
     if add_operator:
