@@ -157,7 +157,7 @@ def url_generator(query='', media=True, advanced=False, history=False, domain=Fa
                 if not q or q == ' ':
                     return
 
-                if control.setting('add.hosts') == 'true' and 6 in indices:
+                if control.setting('add.hosts') == 'true' and 7 in indices:
                     q += ' ' + site + available_domains()
 
                 output = search_link.format(
