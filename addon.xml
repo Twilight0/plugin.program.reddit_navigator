@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.reddit_browser" name="Reddit Browser" version="1.0.1" provider-name="tvaddons">
+<addon id="plugin.program.reddit_browser" name="Reddit Browser" version="1.0.2" provider-name="tvaddons">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.tulip" version="2.0.22"/>
@@ -26,10 +26,17 @@
         <forum>https://www.tvaddons.co/forums/index.php</forum>
         <source>https://github.com/tvaddonsco/plugin.program.reddit_browser</source>
         <size>1711463</size>
-        <news>1.0.1 ~ 14-10-2018
+        <news>1.0.2 ~ 15-10-2018
+- Minor fix for advanced search regarding the appendance of default hosts
+- Updated greek translation for first time prompts
+
+1.0.1 ~ 14-10-2018
 - Removed some misc google domains from default searchable domains
 - Added a few other domains
-- Amended installed size</news>
+- Amended installed size
+
+1.0.0 ~ 13-10-2018
+- Initial Version</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
