@@ -1,3 +1,7 @@
+1.0.2 ~ 15-10-2018
+- Minor fix for advanced search regarding the appendance of default hosts
+- Updated greek translation for first time prompts
+
 1.0.1 ~ 14-10-2018
 - Removed some misc google domains from default searchable domains
 - Added a few other domains
