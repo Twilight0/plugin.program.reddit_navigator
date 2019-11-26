@@ -230,8 +230,7 @@ def available_domains(add_operator=True):
 
     reduced_list = [
         'dailymotion.com', 'docs.google.com', 'drive.google.com', 'estream.nu', 'thevideobee.to', 'streamable.com'
-        'openload.co', 'vk.com', 'flashx.tv', 'vidoza.net', 'clipwatching.com', 'vidzi.tv', 'tune.pk',
-        'streamango.com', 'oload.download', 'oload.tv', 'oload.stream', 'openload.io', 'vshare.io', 'vshare.eu'
+        'vk.com', 'flashx.tv', 'vidoza.net', 'clipwatching.com', 'vidzi.tv', 'tune.pk', 'vshare.io', 'vshare.eu'
     ]
 
     if add_operator:
@@ -547,7 +546,7 @@ def get_ip():
     try:
         s.connect(('10.255.255.255', 1))
         IP = s.getsockname()[0]
-    except:
+    except Exception:
         IP = '127.0.0.1'
     finally:
         s.close()
@@ -571,8 +570,8 @@ def get_skin_resolution():
     except IndexError:
         skin_resolution = res_lines[0]
 
-    xval = int(re.findall('width="(\d{3,4})"', skin_resolution)[0])
-    yval = int(re.findall('height="(\d{3,4})"', skin_resolution)[0])
+    xval = int(re.findall(r'width="(\d{3,4})"', skin_resolution)[0])
+    yval = int(re.findall(r'height="(\d{3,4})"', skin_resolution)[0])
 
     return xval, yval
 

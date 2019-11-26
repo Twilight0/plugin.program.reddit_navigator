@@ -15,8 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import re
-
 from resources.lib.modules.tools import *
 
 from resources.lib.modules.reddit import url_generator, base_link, dotjson, request_headers, reddit_url, account_info
@@ -887,7 +885,7 @@ class Main:
             self.data = self.listing(reddit_url('/subreddits/mine/subscriber'), return_list=True)
             action = 'unsubscribeSubreddit'
         else:
-            self.data = bookmarks.get(table=saved_subrs)
+            self.data = bookmarks.get(file_=saved_subrs)
             action = 'deleteSubreddit'
 
         if not self.data:

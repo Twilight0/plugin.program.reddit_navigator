@@ -216,7 +216,7 @@ def reddit_subs(action, sr_name):
 
     if sr_name is None:
         from tulip.bookmarks import get
-        bookmarks = get(table=saved_subrs)
+        bookmarks = get(file_=saved_subrs)
         if not bookmarks:
             return
         sr_name = ','.join([i['sr_name'] for i in bookmarks])

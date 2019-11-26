@@ -140,7 +140,7 @@ elif action == 'addSubreddit':
 
     from tulip import bookmarks
     from resources.lib.modules.tools import saved_subrs
-    bookmarks.add(url, table=saved_subrs)
+    bookmarks.add(url, file_=saved_subrs)
 
 elif action == 'subscribeSubreddit':
 
@@ -165,7 +165,7 @@ elif action == 'deleteSubreddit':
 
     from tulip import bookmarks
     from resources.lib.modules.tools import saved_subrs
-    bookmarks.delete(url, table=saved_subrs)
+    bookmarks.delete(url, file_=saved_subrs)
 
 elif action == 'unsubscribeSubreddit':
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.reddit_browser" name="Reddit Browser" version="1.0.2" provider-name="tvaddons">
+<addon id="plugin.program.reddit_browser" name="Reddit Browser" version="1.0.3" provider-name="tvaddons">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
-        <import addon="script.module.tulip" version="2.0.22"/>
+        <import addon="script.module.tulip" version="2.4.1"/>
         <import addon="script.module.pyxbmct" version="1.2.0"/>
         <import addon="script.module.urlresolver" version="5.0.06"/>
         <!--<import addon="script.module.resolveurl" version="5.0.06"/>-->
-        <import addon="plugin.video.youtube" version="6.1.4"/>
+        <import addon="plugin.video.youtube" version="6.5.0"/>
         <import addon="repository.xbmchub" version="3.0.0"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="main.py">
@@ -26,7 +26,13 @@
         <forum>https://www.tvaddons.co/forums/index.php</forum>
         <source>https://github.com/tvaddonsco/plugin.program.reddit_browser</source>
         <size>1711463</size>
-        <news>1.0.2 ~ 15-10-2018
+        <news>1.0.3 ~ 26-11-2019
+- Bumped dependencies
+- Various fixes for tulip's newer versions
+- Various tweaks and PEP8
+- Remove dormant domains
+
+1.0.2 ~ 15-10-2018
 - Minor fix for advanced search regarding the appendance of default hosts
 - Updated greek translation for first time prompts
 

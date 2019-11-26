@@ -29,7 +29,7 @@ class RedditResolver(UrlResolver):
 # class RedditResolver(ResolveUrl):
     name = 'reddit'
     domains = ['redd.it', 'reddit.com']
-    pattern = '(?:http[s]*://)*((?:v\.redd\.it|(?:www\.)*reddit.com/video))/([^/]+)'
+    pattern = r'(?:http[s]*://)*((?:v\.redd\.it|(?:www\.)*reddit.com/video))/([^/]+)'
 
     def __init__(self):
         self.net = common.Net()
@@ -43,11 +43,11 @@ class RedditResolver(UrlResolver):
         if html:
             sources = []
 
-            pattern = '''src:\s*canPlayDash\s*\?\s*['"]\s*(?P<dash>[^'"]+)\s*['"]\s*:\s*['"]\s*(?P<hls>[^'"]+)\s*['"]'''
-            match = re.search(pattern=pattern, string=html)
+            pat = r'''src:\s*canPlayDash\s*\?\s*['"]\s*(?P<dash>[^'"]+)\s*['"]\s*:\s*['"]\s*(?P<hls>[^'"]+)\s*['"]'''
+            match = re.search(pattern=pat, string=html)
             if not match:
-                pattern = '''data-hls-url\s*=\s*['"]\s*(?P<hls>[^'"]+).+?data-mpd-url\s*=\s*['"]\s*(?P<dash>[^'"]+)'''
-                match = re.search(pattern=pattern, string=html)
+                pat = r'''data-hls-url\s*=\s*['"]\s*(?P<hls>[^'"]+).+?data-mpd-url\s*=\s*['"]\s*(?P<dash>[^'"]+)'''
+                match = re.search(pattern=pat, string=html)
 
             if match:
                 if self.dash_supported:

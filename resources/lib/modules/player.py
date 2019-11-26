@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import pyxbmct, re, json
+import pyxbmct, re, json, youtube_resolver
 from tulip import control, directory
 from tulip.init import sysaddon
 from resources.lib.modules.tools import close_all, window_activate, images_boolean, get_skin_resolution, TextDisplay
@@ -28,11 +28,11 @@ def router(link):
 
     import urlresolver
 
-    urlresolver.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'smu_plugins'))
+    urlresolver.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
 
     # import resolveurl
     #
-    # resolveurl.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'smu_plugins'))
+    # resolveurl.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
 
     if link.startswith(('acestream://', 'sop://')):
 
@@ -44,8 +44,6 @@ def router(link):
         return stream
 
     elif 'youtu' in link:
-
-        import youtube_resolver
 
         yt_mpd_enabled = control.addon(id='plugin.video.youtube').getSetting('kodion.video.quality.mpd') == 'true'
 
