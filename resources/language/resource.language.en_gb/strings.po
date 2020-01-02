@@ -1,6 +1,6 @@
-# Addon Name: Reddit Browser
-# Addon id: plugin.video.reddit_browser
-# Addon Provider: TVADDONS
+# Addon Name: Reddit Navigator
+# Addon id: plugin.video.reddit_navigator
+# Addon Provider: Twilight0
 
 msgid ""
 msgstr ""
@@ -186,7 +186,7 @@ msgid "Purge bookmarks"
 msgstr ""
 
 msgctxt "#30046"
-msgid "Authorize Reddit Browser"
+msgid "Authorize Reddit Navigator"
 msgstr ""
 
 msgctxt "#30047"
@@ -230,7 +230,7 @@ msgid "Set the ip address to listen on"
 msgstr ""
 
 msgctxt "#30057"
-msgid "Authorize Reddit Browser"
+msgid "Authorize Reddit Navigator"
 msgstr ""
 
 msgctxt "#30058"
@@ -526,7 +526,7 @@ msgid "No links were found"
 msgstr ""
 
 msgctxt "#30131"
-msgid "Welcome to the new [B]Reddit Browser[/B], a powerful [B]scraper addon[/B] for Kodi.[CR][CR]"
+msgid "Welcome to the new [B]Reddit Navigator[/B], a powerful [B]scraper addon[/B] for Kodi.[CR][CR]"
 msgstr ""
 
 msgctxt "#30132"
@@ -542,7 +542,7 @@ msgid "Subreddits exist for [B]any and every topic[/B] you can possibly [B]imagi
 msgstr ""
 
 msgctxt "#30135"
-msgid "The use of the Kodi media center's [B]context menu is critical[/B] to achieving the [B]maximal benefits[/B] of Reddit Browser.[CR][CR]"
+msgid "The use of the Kodi media center's [B]context menu is critical[/B] to achieving the [B]maximal benefits[/B] of Reddit Navigator.[CR][CR]"
 msgstr ""
 
 msgctxt "#30136"
@@ -566,7 +566,7 @@ msgid "Unregistered users have access to the [B]local bookmarking[/B] feature, w
 msgstr ""
 
 msgctxt "#30141"
-msgid "Reddit Browser fully supports [B]Ace Stream[/B] and [B]SopCast[/B] P2P live streams with the help of the optional [B]Plexus[/B] addon for Kodi.[CR][CR]"
+msgid "Reddit Navigator fully supports [B]Ace Stream[/B] and [B]SopCast[/B] P2P live streams with the help of the optional [B]Plexus[/B] addon for Kodi.[CR][CR]"
 msgstr ""
 
 msgctxt "#30142"

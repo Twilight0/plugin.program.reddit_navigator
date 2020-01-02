@@ -1,6 +1,6 @@
-# Addon Name: Reddit Browser
-# Addon id: plugin.video.reddit_browser
-# Addon Provider: TVADDONS
+# Addon Name: Reddit Navigator
+# Addon id: plugin.video.reddit_navigator
+# Addon Provider: Twilight0
 
 msgid ""
 msgstr ""
@@ -67,7 +67,7 @@ msgstr "(Απ)ενεργοποίηση αποσφαλμάτωσης"
 
 msgctxt "#30016"
 msgid "Do you want to enable addon specific debugging as well?"
-msgstr "Θέλετε να ενεργοποιήσετε και την λειτουργία αποσφαλμάτωσης του Reddit Browser;"
+msgstr "Θέλετε να ενεργοποιήσετε και την λειτουργία αποσφαλμάτωσης του Reddit Navigator;"
 
 msgctxt "#30017"
 msgid "IP Address of this machine"
@@ -186,8 +186,8 @@ msgid "Purge bookmarks"
 msgstr "Εκκαθάριση σελιδοδεικτών"
 
 msgctxt "#30046"
-msgid "Authorize Reddit Browser"
-msgstr "Έγκριση Reddit Browser"
+msgid "Authorize Reddit Navigator"
+msgstr "Έγκριση Reddit Navigator"
 
 msgctxt "#30047"
 msgid "Port to listen on"
@@ -230,8 +230,8 @@ msgid "Set the ip address to listen on"
 msgstr "Εφαρμογή διεύθυνσης ip για ακρόαση"
 
 msgctxt "#30057"
-msgid "Authorize Reddit Browser"
-msgstr "Έγκριση Reddit Browser"
+msgid "Authorize Reddit Navigator"
+msgstr "Έγκριση Reddit Navigator"
 
 msgctxt "#30058"
 msgid "Revoke authorization"
@@ -526,8 +526,8 @@ msgid "No links were found"
 msgstr "Δεν βρέθηκαν σύνδεσμοι"
 
 msgctxt "#30131"
-msgid "Welcome to the new [B]Reddit Browser[/B], a powerful [B]scraper addon[/B] for Kodi.[CR][CR]"
-msgstr "Καλώς ήρθατε στο νέο [B]Reddit Browser[/B], ένα ισχυρό [B]πρόσθετο φιλτραρίσματος[/Β] για το Kodi.[CR][CR]"
+msgid "Welcome to the new [B]Reddit Navigator[/B], a powerful [B]scraper addon[/B] for Kodi.[CR][CR]"
+msgstr "Καλώς ήρθατε στο νέο [B]Reddit Navigator[/B], ένα ισχυρό [B]πρόσθετο φιλτραρίσματος[/Β] για το Kodi.[CR][CR]"
 
 msgctxt "#30132"
 msgid "Scrape [B]video[/B], [B]live streams[/B], [B]audio[/B], [B]images[/B] and [B]discussions[/B] posted by members of the Reddit platform. Use the [B]powerful search functionality[/B] to discover a world of content.[CR][CR]"
@@ -542,8 +542,8 @@ msgid "Subreddits exist for [B]any and every topic[/B] you can possibly [B]imagi
 msgstr "Τα subreddit υπάρχουν [B]για κάθε είδους θέματος[/B] που μπορείτε να [B]φανταστείτε[/B].[CR][CR]"
 
 msgctxt "#30135"
-msgid "The use of the Kodi media center's [B]context menu is critical[/B] to achieving the [B]maximal benefits[/B] of Reddit Browser.[CR][CR]"
-msgstr "Η χρήση του [B]εναλλακτικού μενού[/B] του συστήματος πολυμέσων Kodi είναι σημαντική, ώστε να επωφεληθείτε [B]όλων των δυνατοτήτων[/B] του Reddit Browser.[CR][CR]"
+msgid "The use of the Kodi media center's [B]context menu is critical[/B] to achieving the [B]maximal benefits[/B] of Reddit Navigator.[CR][CR]"
+msgstr "Η χρήση του [B]εναλλακτικού μενού[/B] του συστήματος πολυμέσων Kodi είναι σημαντική, ώστε να επωφεληθείτε [B]όλων των δυνατοτήτων[/B] του Reddit Navigator.[CR][CR]"
 
 msgctxt "#30136"
 msgid "Depending on your platform, the [B]context menu[/B] is launched via [B]different methods[/B].[CR][CR]"
@@ -566,8 +566,8 @@ msgid "Unregistered users have access to the [B]local bookmarking[/B] feature, w
 msgstr "Οι μη εγγεγραμένοι μπορούν να χρησιμοποιήσουν το χαρακτηριστικό [B]τοπικών σελιδοδεικτών[/B]. Οι εγγεγραμένοι χρήστες επιπλέον [B]αποκτούν πρόσβαση[/B] στον λογαριασμό τους.[CR][CR]"
 
 msgctxt "#30141"
-msgid "Reddit Browser fully supports [B]Ace Stream[/B] and [B]SopCast[/B] P2P live streams with the help of the optional [B]Plexus[/B] addon for Kodi.[CR][CR]"
-msgstr "Το Reddit Browser υποστηρίζει πλήρως τις P2P ζωντανές ροές [B]Ace Stream[/B] και [B]SopCast[/B] με την βοήθεια του προαιρετικού πρόσθετου Plexus για το Kodi.[CR][CR]"
+msgid "Reddit Navigator fully supports [B]Ace Stream[/B] and [B]SopCast[/B] P2P live streams with the help of the optional [B]Plexus[/B] addon for Kodi.[CR][CR]"
+msgstr "Το Reddit Navigator υποστηρίζει πλήρως τις P2P ζωντανές ροές [B]Ace Stream[/B] και [B]SopCast[/B] με την βοήθεια του προαιρετικού πρόσθετου Plexus για το Kodi.[CR][CR]"
 
 msgctxt "#30142"
 msgid "This original Kodi addon took [B]almost a year[/B] to develop, so we hope y'all enjoy!"
