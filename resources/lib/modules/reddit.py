@@ -17,16 +17,16 @@
 
 import json, time, platform, pyxbmct
 from re import sub as substitute
-from resources.lib.modules.tools import available_domains, add_to_history, history_subrs, history_media, get_ip
+from .tools import available_domains, add_to_history, history_subrs, history_media, get_ip
 from tulip import control, client
 from tulip.log import log_debug
 from tulip.compat import quote_plus, quote, BaseHTTPServer, ThreadingMixIn
-from resources.lib.modules.tools import convert_date, saved_subrs, refresh
+from .tools import convert_date, saved_subrs, refresh
 
 
 dotjson = '{0}'.format('' if control.setting('access.token') else '.json')
-client_id = 'WRtrShlQM3Boug'
-state = 'redditbrowser'
+client_id = 'KoGwnHGiWbZOjw'
+state = 'redditnavigator'
 
 redirect_uri = 'http://{0}:{1}/'.format('127.0.0.1', '50201')
 scope = ['identity', 'read', 'mysubreddits', 'save', 'history', 'subscribe']
@@ -34,8 +34,8 @@ scope = ['identity', 'read', 'mysubreddits', 'save', 'history', 'subscribe']
 
 def user_agent():
 
-    UA = '{0} {1}:Reddit Browser:v{2} (by /u/tvaddonsdotco)'.format(
-        platform.system(), platform.release(), control.version()
+    UA = '{0}, {1}: {2}:v{3} (by /u/TwilightZer0)'.format(
+        platform.version(), platform.release(), control.name(), control.version()
     )
 
     return UA
@@ -672,11 +672,11 @@ def reddit_page(authorized=False, token=''):
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <title>Reddit Browser</title>
+        <title>{name}</title>
     </head>
     <body>
         <div style="text-align: center;">
-            <h1>Reddit Browser, {version}</h1>
+            <h1>{name}, {version}</h1>
             {line1}!<br>
             {token}<br>
             {line2}
@@ -687,6 +687,7 @@ def reddit_page(authorized=False, token=''):
 
     if authorized:
         html = auth_page.format(
+            name=control.name(),
             version=control.lang(30070).format(control.version()).encode('utf-8'),
             token=control.lang(30069).format(token).encode('utf-8'),
             line1=control.lang(30402).encode('utf-8'),
@@ -694,6 +695,7 @@ def reddit_page(authorized=False, token=''):
         )
     else:
         html = auth_page.format(
+            name=control.name(),
             version=control.lang(30070).format(control.version()).encode('utf-8'),
             token='',
             line1=control.lang(30067).encode('utf-8'),

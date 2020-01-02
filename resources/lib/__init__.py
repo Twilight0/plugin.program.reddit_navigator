@@ -14,36 +14,3 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
-import time
-from tulip import control
-from tulip.init import params
-
-content = params.get('content_type')
-action = params.get('action')
-url = params.get('url')
-image = params.get('image')
-title = params.get('title')
-name = params.get('name')
-query = params.get('query')
-plot = params.get('plot')
-genre = params.get('genre')
-
-
-def refresh_access():
-
-    if control.setting('refresh.token') and control.setting('auto.refresh') == 'true':
-
-        if float(control.setting('expiration.stamp')) < time.time():
-
-            from resources.lib.modules.reddit import get_tokens
-            get_tokens(refresh=True)
-
-
-def first_time_prompt():
-
-    if control.setting('first.time') == 'true':
-
-        from resources.lib.modules.tools import welcome_message
-        welcome_message()
-        control.setSetting('first.time', 'false')

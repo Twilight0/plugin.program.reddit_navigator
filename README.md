@@ -1,16 +1,10 @@
-### Disclaimer
-
-Kodi is a registered trademark of the XBMC Foundation. We are not connected to or in any other way affiliated with Kodi.
-
-DMCA: legal@tvaddons.co
-
 ### Description
 
-Reddit Browser is a free and open source Kodi addon for the popular social sharing platform known as [Reddit](https://www.reddit.com).
+Reddit Navigator is a free and open source Kodi addon for the popular social sharing platform known as [Reddit](https://www.reddit.com).
 
 Since it is designed to work with the Kodi media center, certain limitations do apply. This Kodi addon has been developed from scratch.
 
-Reddit Browser for Kodi is designed to scrape all forms of content: video, live streams, audio, images, and text.
+Reddit Navigator for Kodi is designed to scrape all forms of content: video, live streams, audio, images, and text.
 
 **Features:**
 
@@ -25,7 +19,7 @@ Reddit Browser for Kodi is designed to scrape all forms of content: video, live 
 * My account menu allowing access to remotely saved items and subscriptions and ability to sync locally saved items.
 * QRcode generation for obtaining tokens from a mobile device.
 * Tokens revocation function acting as logout.
-* VOD playback with the help of [urlresolver](https://github.com/tvaddonsco/script.module.urlresolver).
+* VOD playback with the help of [resolveurl](https://github.com/jsergio123/script.module.resolveurl).
 * P2P acestream/sopcast playback with the help of plexus (optional).
 * Textviewer for comments.
 * Full-screen and windowed image modes display.
@@ -47,8 +41,8 @@ Reddit Browser for Kodi is designed to scrape all forms of content: video, live 
 **Dependencies:**
 
 * Tulip libraries kindly provided by Twilight0: [https://github.com/Twilight0/script.module.tulip](https://github.com/Twilight0/script.module.tulip)
-* URLresolver for video resolving from various cyberlockers
+* ResolveURL for video resolving from various cyberlockers
 * Youtube addon (provides resolving and dash playback of youtube streams)
 * **Pyxbmct** for windowed display of images and authentication window
 
-Artwork kindly provided by **jokstergfx**
+Icons sourced from **Flaticon.com** ([Licence](https://file000.flaticon.com/downloads/license/license.pdf "Licence"))

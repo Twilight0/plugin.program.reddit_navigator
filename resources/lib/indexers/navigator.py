@@ -15,9 +15,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from resources.lib.modules.tools import *
+from ..modules.tools import *
 
-from resources.lib.modules.reddit import url_generator, base_link, dotjson, request_headers, reddit_url, account_info
+from ..modules.reddit import url_generator, base_link, dotjson, request_headers, reddit_url, account_info
 from tulip import directory, client, bookmarks, cache, control
 from tulip.compat import iteritems, urlparse, urlunparse, urlencode, parse_qsl
 

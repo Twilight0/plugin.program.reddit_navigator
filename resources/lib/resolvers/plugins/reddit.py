@@ -17,16 +17,13 @@
 '''
 
 import re
-# from resolveurl import common
-# from resolveurl.plugins.lib import helpers
-# from resolveurl.resolver import ResolveUrl, ResolverError
-from urlresolver import common
-from urlresolver.plugins.lib import helpers
-from urlresolver.resolver import UrlResolver, ResolverError
+from resolveurl import common
+from resolveurl.plugins.lib import helpers
+from resolveurl.resolver import ResolveUrl, ResolverError
 
 
-class RedditResolver(UrlResolver):
-# class RedditResolver(ResolveUrl):
+class RedditResolver(ResolveUrl):
+
     name = 'reddit'
     domains = ['redd.it', 'reddit.com']
     pattern = r'(?:http[s]*://)*((?:v\.redd\.it|(?:www\.)*reddit.com/video))/([^/]+)'

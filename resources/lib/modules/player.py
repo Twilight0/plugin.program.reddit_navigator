@@ -15,24 +15,19 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import pyxbmct, re, json, youtube_resolver
+import pyxbmct, re, json, youtube_resolver, resolveurl
+from sys import argv
 from tulip import control, directory
 from tulip.init import sysaddon
-from resources.lib.modules.tools import close_all, window_activate, images_boolean, get_skin_resolution, TextDisplay
-from resources.lib.resolvers.images import router as pic_router
-from resources.lib import image as thumb
-from resources.lib.modules.reddit import base_link
+from tulip.compat import parse_qsl
+from .tools import close_all, window_activate, images_boolean, get_skin_resolution, TextDisplay
+from ..resolvers.images import router as pic_router
+from .reddit import base_link
 
 
 def router(link):
 
-    import urlresolver
-
-    urlresolver.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
-
-    # import resolveurl
-    #
-    # resolveurl.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
+    resolveurl.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
 
     if link.startswith(('acestream://', 'sop://')):
 
@@ -58,13 +53,9 @@ def router(link):
 
         return resolved
 
-    elif urlresolver.HostedMediaFile(link).valid_url():
+    elif resolveurl.HostedMediaFile(link).valid_url():
 
-        stream = urlresolver.resolve(link)
-
-    # elif resolveurl.HostedMediaFile(link).valid_url():
-    #
-    #     stream = resolveurl.resolve(link)
+        stream = resolveurl.resolve(link)
 
         return stream
 
@@ -148,7 +139,9 @@ def show_picture(title, link, permalink=None):
 
         if 'mp4' in image:
 
-            play(link=image, title=title, image=thumb, skip_question=True)
+            play(
+                link=image, title=title, image=dict(parse_qsl(argv[2].replace('?', ''))).get('image'), skip_question=True
+            )
 
         else:
 

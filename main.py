@@ -15,14 +15,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-# TODO: Think for a way for displaying comments in flat mode (later on)
-# TODO: (Possibly in the future) Obtain jpeg converted web pages via phantomjs
-# TODO: Add ability to open /r/* links (needs testing)
-# TODO: Add /domain/* navigation ability (needs testing)
-# TODO: Add navigation capability through "simple context menu"
+from tulip.compat import parse_qsl
+from sys import argv
+from resources.lib.modules.tools import refresh_access, first_time_prompt
 
+params = dict(parse_qsl(argv[2].replace('?', '')))
 
-from resources.lib import action, url, content, query, title, plot, refresh_access, first_time_prompt
+content = params.get('content_type')
+action = params.get('action')
+url = params.get('url')
+image = params.get('image')
+title = params.get('title')
+name = params.get('name')
+query = params.get('query')
+plot = params.get('plot')
+genre = params.get('genre')
 
 refresh_access()
 first_time_prompt()
@@ -253,3 +260,7 @@ elif action == 'refresh':
 
     from resources.lib.modules.tools import refresh
     refresh()
+
+
+# TODO: Add ability to open /r/* links (needs testing)
+# TODO: Add /domain/* navigation ability (needs testing)

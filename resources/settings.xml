@@ -3,7 +3,7 @@
     <category label="30006">
         <setting id="window.action" type="enum" label="30009" lvalues="30007|30008" default="1"/>
         <setting type="lsep" label="30160"/>
-        <setting id="single.button" label="30156" type="bool" default="true"/>
+        <setting id="single.button" label="30156" type="bool" default="false"/>
         <setting id="image.fullscreen" label="30071" type="bool" default="true"/>
         <setting id="text.box" label="30148" type="bool" default="false"/>
         <setting id="user.icon" label="30128" type="bool" default="false"/>
@@ -11,7 +11,7 @@
         <!--<setting id="thread.appearance" type="enum" label="30114" lvalues="30115|30116" default="1"/>-->
         <setting type="sep"/>
         <setting id="include.nsfw" label="30014" type="bool" default="false"/>
-        <setting id="add.hosts" label="30054" type="bool" default="true"/>
+        <setting id="add.hosts" label="30054" type="bool" default="false"/>
         <setting type="lsep" label="30111"/>
         <setting id="label.formatting" type="enum" label="30108" lvalues="30110|30109" default="0"/>
         <setting id="history.bool" label="30037" type="bool" default="true"/>

@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import xbmc, socket, json, re, pyxbmct
+import xbmc, socket, json, re, pyxbmct, time
 from tulip import control, client
 from tulip.init import sysaddon
 from tulip.compat import quote, urlparse, urlunparse, range, iteritems, unicode
@@ -239,9 +239,9 @@ def available_domains(add_operator=True):
         return reduced_list
 
     # Reserved:
-    # import urlresolver
+    # import resolveurl
 
-    # rr = urlresolver.relevant_resolvers()
+    # rr = resolveurl.relevant_resolvers()
     # domains = [r.domains for r in rr][1:]
     # domain_list = [d for dm in domains for d in dm]
 
@@ -607,3 +607,21 @@ def refresh():
     from tulip.cache import clear
     clear(withyes=False)
     control.refresh()
+
+
+def refresh_access():
+
+    if control.setting('refresh.token') and control.setting('auto.refresh') == 'true':
+
+        if float(control.setting('expiration.stamp')) < time.time():
+
+            from .reddit import get_tokens
+            get_tokens(refresh=True)
+
+
+def first_time_prompt():
+
+    if control.setting('first.time') == 'true':
+
+        welcome_message()
+        control.setSetting('first.time', 'false')
