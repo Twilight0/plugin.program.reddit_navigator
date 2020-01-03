@@ -7,3 +7,4 @@
 - Changed artwork
 - Changed user agent string
 - Changed app token
+- Restored a window call function which didn't work on Leia

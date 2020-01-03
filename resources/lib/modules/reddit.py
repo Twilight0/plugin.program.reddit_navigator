@@ -569,6 +569,8 @@ def authorize():
             control.setSetting('auth.token', auth_token)
             get_tokens(code=auth_token)
 
+    control.sleep(200)
+    control.refresh()
 
 def account_info():
 

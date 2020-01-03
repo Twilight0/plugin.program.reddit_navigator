@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.reddit_navigator" name="Reddit Navigator" version="1.0.1" provider-name="Twilight0">
+<addon id="plugin.program.reddit_navigator" name="Reddit Navigator" version="1.0.2" provider-name="Twilight0">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.tulip" version="2.4.1"/>
@@ -30,7 +30,8 @@
 - Some other code related tweaks
 - Changed artwork
 - Changed user agent string
-- Changed app token</news>
+- Changed app token
+- Restored a window call function which didn't work on Leia</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>

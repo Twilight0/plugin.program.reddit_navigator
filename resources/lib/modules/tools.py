@@ -151,6 +151,8 @@ def welcome_message():
 
 def window_activate(url=None, query=None, jump=False, action='listing'):
 
+    control.execute('Dialog.Close(all)')
+
     if not jump:
 
         if query == 'video':
