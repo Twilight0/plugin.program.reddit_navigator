@@ -178,9 +178,6 @@ class Main:
             ai = account_info()
 
             username, icon_img = (ai['name'], ai['icon_img'])
-            parsed = urlparse(icon_img)
-            query = 'fit=crop&crop=faces%2Centropy&arh=1.0&w=256&h=256&s='
-            icon_img = urlunparse(parsed._replace(query=query + icon_img.rpartition('s=')[2]))
             control.setSetting('username.string', username)
             control.setSetting('avatar.url', icon_img)
 
@@ -551,9 +548,8 @@ class Main:
                 replies_urls = None
                 replies = 0
 
-            depth = '' if children_data['depth'] == 0 else '>' * children_data['depth'] + ' '
             replies_num = ' | ' + control.lang(30102) + str(replies) if replies > 0 else ''
-            title = depth + short.replace('\n', '') + self.formatting + '[I]' + author + '[/I]' + replies_num
+            title = short.replace('\n', '') + self.formatting + '[I]' + author + '[/I]' + replies_num
 
             url = permalink = base_link() + children_data['permalink']
 
@@ -565,10 +561,6 @@ class Main:
                 'subreddit_id': subreddit_id, 'name': name, 'body': body, 'plot': body, 'query': replies_urls,
                 'replies_urls': replies_urls, 'link_id': link_id
             }
-
-            # if control.setting('thread.appearance') == '0':
-
-            # del pairs['reply_json']
 
             return pairs
 
@@ -956,14 +948,6 @@ class Main:
                 'title': control.lang(30050),
                 'action': 'settings',
                 'icon': 'settings_tools.png',
-                'isFolder': 'False',
-                'isPlayable': 'False'
-            }
-            ,
-            {
-                'title': control.lang(30051),
-                'action': 'install_plexus',
-                'icon': 'install_plexus.png',
                 'isFolder': 'False',
                 'isPlayable': 'False'
             }

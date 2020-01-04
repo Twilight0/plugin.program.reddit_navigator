@@ -1,4 +1,4 @@
-1.0.X ~ 02-01-2020
+1.0.X ~ 04-01-2020
 - Initial Version
 - Forked from Reddit Browser
 - Replaced urlresolver with resolveurl
@@ -8,3 +8,7 @@
 - Changed user agent string
 - Changed app token
 - Restored a window call function which didn't work on Leia
+- Removed "depth" variable because it was supposed to be used on flat comments tree
+- Fixed saved items menu
+- Fixed user icon for my account menu
+- Removed capability to install plexus

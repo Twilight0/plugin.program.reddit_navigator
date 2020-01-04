@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <settings>
     <category label="30006">
-        <setting id="window.action" type="enum" label="30009" lvalues="30007|30008" default="1"/>
+        <setting id="window.action" type="select" label="30009" lvalues="30007|30008" default="1"/>
         <setting type="lsep" label="30160"/>
         <setting id="single.button" label="30156" type="bool" default="false"/>
         <setting id="image.fullscreen" label="30071" type="bool" default="true"/>
         <setting id="text.box" label="30148" type="bool" default="false"/>
-        <setting id="user.icon" label="30128" type="bool" default="false"/>
+        <setting id="user.icon" label="30128" type="bool" default="true"/>
         <setting id="pyxbmct.estuary" label="30129" type="bool" default="true"/>
         <!--<setting id="thread.appearance" type="enum" label="30114" lvalues="30115|30116" default="1"/>-->
         <setting type="sep"/>
@@ -58,7 +58,6 @@
         <setting label="30040" type="action" action="RunPlugin(plugin://$ID/?action=delete_history)"/>
         <setting label="30042" type="action" action="RunPlugin(plugin://$ID/?action=clear_cache)"/>
         <setting label="30045" type="action" action="RunPlugin(plugin://$ID/?action=purge_bookmarks)"/>
-        <setting label="30051" type="action" action="RunPlugin(plugin://$ID/?action=install_plexus)"/>
         <setting label="30015" type="action" action="RunPlugin(plugin://$ID/?action=debugging_toggle)"/>
         <setting id="first.time" label="30112" type="bool" default="true" visible="true"/>
         <setting id="debugging.toggle" label="Debug toggle" type="bool" default="false" visible="false"/>

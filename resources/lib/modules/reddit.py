@@ -572,6 +572,7 @@ def authorize():
     control.sleep(200)
     control.refresh()
 
+
 def account_info():
 
     url = reddit_url('/api/v1/me')
@@ -581,7 +582,7 @@ def account_info():
     name = json.loads(json_obj)['name']
     icon_img = json.loads(json_obj)['icon_img']
 
-    return {'name': name, 'icon_img': icon_img}
+    return {'name': name, 'icon_img': client.replaceHTMLCodes(icon_img)}
 
 
 def get_tokens(code=None, refresh=False):
