@@ -261,6 +261,11 @@ elif action == 'refresh':
     from resources.lib.modules.tools import refresh
     refresh()
 
+elif action == 'quit':
+
+    from tulip.control import quit_kodi
+    quit_kodi()
+
 
 # TODO: Add ability to open /r/* links (needs testing)
 # TODO: Add /domain/* navigation ability (needs testing)

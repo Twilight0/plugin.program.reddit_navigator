@@ -240,7 +240,7 @@ def comment_scraper(text, title):
 
     link = None
 
-    links = re.findall('(\w*(?:://|/r/|/domain/)[^\r\n\t\f\v()\[\] ]*)', text)
+    links = re.findall(r'(\w*(?:://|/r/|/domain/)[^\r\n\t\f\v()\[\] ]*)', text)
 
     if links:
 

@@ -983,6 +983,14 @@ class Main:
                 'isFolder': 'False',
                 'isPlayable': 'False'
             }
+            ,
+            {
+                'title': control.lang(30115),
+                'action': 'quit',
+                'icon': 'quit.png',
+                'isFolder': 'False',
+                'isPlayable': 'False'
+            }
         ]
 
         directory.add(self.list)

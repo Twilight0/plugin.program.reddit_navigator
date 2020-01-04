@@ -20,7 +20,7 @@ from re import sub as substitute
 from .tools import available_domains, add_to_history, history_subrs, history_media, get_ip
 from tulip import control, client
 from tulip.log import log_debug
-from tulip.compat import quote_plus, quote, BaseHTTPServer, ThreadingMixIn
+from tulip.compat import quote_plus, BaseHTTPServer, ThreadingMixIn, quote, parse_qsl, urlparse
 from .tools import convert_date, saved_subrs, refresh
 
 
@@ -30,6 +30,7 @@ state = 'redditnavigator'
 
 redirect_uri = 'http://{0}:{1}/'.format('127.0.0.1', '50201')
 scope = ['identity', 'read', 'mysubreddits', 'save', 'history', 'subscribe']
+short_link = 'https://is.gd/rn_standard_auth' if control.setting('compact.page') == 'false' else 'https://is.gd/rn_compact_auth'
 
 
 def user_agent():
@@ -231,7 +232,7 @@ def reddit_subs(action, sr_name):
     if action == 'unsub' or sleep:
 
         if sleep:
-            control.sleep(100)
+            control.sleep(200)
 
         control.refresh()
 
@@ -284,8 +285,6 @@ class QR_display(pyxbmct.AddonDialogWindow):
 
     pyxbmct.skin.estuary = control.setting('pyxbmct.estuary') == 'true'
 
-    link = 'https://is.gd/standard_auth' if control.setting('compact.page') == 'false' else 'https://is.gd/compact_auth'
-
     geometry = (542, 286, 6, 2)
 
     def __init__(self, title):
@@ -295,7 +294,7 @@ class QR_display(pyxbmct.AddonDialogWindow):
         self.text_box = None
         self.link_button = None
         self.close_button = None
-        self.address_button = None
+        self.manual_button = None
         self.server_button = None
         self.setGeometry(*self.geometry)
         self.set_controls()
@@ -310,36 +309,25 @@ class QR_display(pyxbmct.AddonDialogWindow):
             aspectRatio=2
         )
         self.placeControl(self.image, 0, 0, 6)
-        # Text box
-        self.text_box = pyxbmct.TextBox()
-        self.placeControl(self.text_box, 0, 1, 2)
-        self.text_box.setText(control.lang(30064).format(get_ip()))
-        self.text_box.autoScroll(1000, 1000, 1000)
-        # Button capable of changing the local ip address
-        self.address_button = pyxbmct.Button(control.lang(30056))
-        self.placeControl(self.address_button, 2, 1)
-        self.connect(self.address_button, lambda: ip_address_set())
-        # Button capable of starting the server
-        self.server_button = pyxbmct.Button(control.lang(30147))
-        self.placeControl(self.server_button, 3, 1)
-        self.connect(self.server_button, lambda: reddit_server())
         # Button displaying address for auth, and capable of opening it
-        self.link_button = pyxbmct.Button(self.link)
-        self.placeControl(self.link_button, 4, 1)
-        self.connect(self.link_button, lambda: control.open_web_browser(self.link))
+        self.link_button = pyxbmct.Button(short_link)
+        self.placeControl(self.link_button, 0, 1)
+        self.connect(self.link_button, lambda: control.open_web_browser(short_link))
+        # Button capable of calling the function to enter the token
+        self.manual_button = pyxbmct.Button(control.lang(30081))
+        self.placeControl(self.manual_button, 2, 1)
+        self.connect(self.manual_button, lambda: manual_auth(tell=False))
         # Close button
         self.close_button = pyxbmct.Button(control.lang(30062))
-        self.placeControl(self.close_button, 5, 1)
+        self.placeControl(self.close_button, 4, 1)
         self.connect(self.close_button, self.close)
 
     def set_navigation(self):
 
-        self.address_button.controlDown(self.server_button)
-        self.server_button.controlUp(self.address_button)
-        self.server_button.controlDown(self.link_button)
-        self.link_button.controlUp(self.server_button)
-        self.link_button.controlDown(self.close_button)
-        self.close_button.controlUp(self.link_button)
+        self.link_button.controlDown(self.manual_button)
+        self.manual_button.controlUp(self.link_button)
+        self.manual_button.controlDown(self.close_button)
+        self.close_button.controlUp(self.manual_button)
         self.setFocus(self.close_button)
 
 
@@ -348,8 +336,6 @@ def kodi_auth():
     aspect_ratio = control.infoLabel('Skin.AspectRatio')
 
     def obtain_authorization(_cookie, _uh):
-
-        from tulip.compat import parse_qsl, urlparse
 
         data = {
             'authorize': 'Allow', 'state': state, 'redirect_uri': redirect_uri, 'response_type': 'code',
@@ -423,9 +409,9 @@ def kodi_auth():
         pyxbmct.skin.estuary = control.setting('pyxbmct.estuary') == 'true'
 
         if aspect_ratio == '4:3':
-            geometry = (341, 256, 5, 1)
+            geometry = (341, 296, 6, 1)
         else:
-            geometry = (455, 256, 5, 1)
+            geometry = (455, 296, 6, 1)
 
         def __init__(self, title):
 
@@ -435,6 +421,7 @@ def kodi_auth():
             self.password_label = None
             self.pass_input = None
             self.submit_button = None
+            self.cancel_button = None
             self.setGeometry(*self.geometry)
             self.set_controls()
             self.set_navigation()
@@ -454,10 +441,14 @@ def kodi_auth():
             # Password input
             self.pass_input = pyxbmct.Edit(control.lang(30153), isPassword=True)
             self.placeControl(self.pass_input, 3, 0)
-            # Close button
+            # Submit button
             self.submit_button = pyxbmct.Button(control.lang(30154))
             self.placeControl(self.submit_button, 4, 0)
             self.connect(self.submit_button, lambda: self.submit(True))
+            # Cancel button
+            self.cancel_button = pyxbmct.Button(control.lang(30064))
+            self.placeControl(self.cancel_button, 5, 0)
+            self.connect(self.cancel_button, self.close)
 
         def set_navigation(self):
 
@@ -465,6 +456,8 @@ def kodi_auth():
             self.pass_input.controlUp(self.user_input)
             self.pass_input.controlDown(self.submit_button)
             self.submit_button.controlUp(self.pass_input)
+            self.submit_button.controlDown(self.cancel_button)
+            self.cancel_button.controlUp(self.submit_button)
             self.setFocus(self.user_input)
 
         def credentials(self):
@@ -501,18 +494,25 @@ def kodi_auth():
 
     html = client.request(authorization_link(True), cookie=cookie)
 
-    uh = client.parseDOM(html, 'input', attrs={'name': 'uh'}, ret='value')[0]
-    permissions = client.parseDOM(html, 'div', attrs={'class': 'access-permissions'})[0]
-    notice = client.parseDOM(html, 'p', attrs={'class': 'notice'})[0]
+    try:
 
-    text = client.replaceHTMLCodes(client.stripTags(permissions + '[CR]' + notice))
+        uh = client.parseDOM(html, 'input', attrs={'name': 'uh'}, ret='value')[0]
 
-    text = substitute(r'([.:]) ?', r'\1[CR]', text).partition('[CR]')
+        permissions = client.parseDOM(html, 'div', attrs={'class': 'access-permissions'})[0]
+        notice = client.parseDOM(html, 'p', attrs={'class': 'notice'})[0]
 
-    prompt_window = Prompt(title=text[0], description=text[2], _cookie=cookie, _uh=uh)
-    prompt_window.doModal()
+        text = client.replaceHTMLCodes(client.stripTags(permissions + '[CR]' + notice))
 
-    del prompt_window
+        text = substitute(r'([.:]) ?', r'\1[CR]', text).partition('[CR]')
+
+        prompt_window = Prompt(title=text[0], description=text[2], _cookie=cookie, _uh=uh)
+        prompt_window.doModal()
+
+        del prompt_window
+
+    except IndexError:
+
+        control.okDialog(control.name(), control.lang(30114))
 
 
 def ip_address_set():
@@ -526,6 +526,24 @@ def ip_address_set():
     else:
 
         control.setSetting('ip.address', get_ip())
+
+
+def manual_auth(tell=True):
+
+    if tell:
+        control.okDialog(control.name(), control.lang(30146).format(short_link))
+
+    if control.setting('ip.address') == '0.0.0.0':
+        ip_address_set()
+
+    auth_token = control.dialog.input(heading=control.lang(30082))
+
+    if not auth_token:
+        control.okDialog(control.name(), control.lang(30083))
+        return
+    else:
+        control.setSetting('auth.token', auth_token)
+        get_tokens(code=auth_token)
 
 
 def authorize():
@@ -555,22 +573,11 @@ def authorize():
 
     elif choice == 3:
 
-        control.okDialog(control.name(), control.lang(30146).format(QR_display.link))
+        manual_auth()
 
-        if control.setting('ip.address') == '0.0.0.0':
-            ip_address_set()
-
-        auth_token = control.dialog.input(heading=control.lang(30082))
-
-        if not auth_token:
-            control.okDialog(control.name(), control.lang(30083))
-            return
-        else:
-            control.setSetting('auth.token', auth_token)
-            get_tokens(code=auth_token)
-
-    control.sleep(200)
-    control.refresh()
+    if choice != -1:
+        control.sleep(200)
+        control.refresh()
 
 
 def account_info():
@@ -628,7 +635,7 @@ def get_tokens(code=None, refresh=False):
         control.setSetting('refresh.token', tokens['refresh_token'])
         control.infoDialog(control.lang(30402))
         control.refresh()
-    elif refresh:
+    elif refresh and control.setting('notify.refresh') == 'true':
         control.infoDialog(control.lang(30145))
 
     control.setSetting('auth.toggle', 'false')
@@ -666,6 +673,7 @@ def revoke():
 
         tokens_reset()
 
+        control.sleep(200)
         control.refresh()
 
 
@@ -720,8 +728,6 @@ class BaseServer(BaseHTTPServer.BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-
-        from tulip.compat import urlparse, parse_qsl
 
         parsed = urlparse(self.path)
         params = dict(parse_qsl(parsed.query))

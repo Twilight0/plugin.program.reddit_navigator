@@ -258,7 +258,7 @@ msgid "Activate http server and open link immediately"
 msgstr ""
 
 msgctxt "#30064"
-msgid "If you want to authorize from a different device in your local network, this machine's IP address is: [B]{0}[/B]"
+msgid "Cancel"
 msgstr ""
 
 msgctxt "#30065"
@@ -322,7 +322,7 @@ msgid "Are you sure you want to revoke stored tokens?"
 msgstr ""
 
 msgctxt "#30080"
-msgid "Open qrcode window and do other actions (advanced)"
+msgid "Obtain QR code (alternative method)"
 msgstr ""
 
 msgctxt "#30081"
@@ -458,15 +458,15 @@ msgid "Read subreddit's description"
 msgstr ""
 
 msgctxt "#30114"
-msgid "Comments threads' appearance"
+msgid "Wrong username and/or password"
 msgstr ""
 
 msgctxt "#30115"
-msgid "Nested"
-msgstr "Σε υπομενού"
+msgid "Quit"
+msgstr ""
 
 msgctxt "#30116"
-msgid "Flat"
+msgid ""
 msgstr ""
 
 msgctxt "#30117"
@@ -590,7 +590,7 @@ msgid "Please open this link in your web browser to retrieve authorization token
 msgstr ""
 
 msgctxt "#30147"
-msgid "Start server now"
+msgid ""
 msgstr ""
 
 msgctxt "#30148"
@@ -643,6 +643,10 @@ msgstr ""
 
 msgctxt "#30160"
 msgid "Setting below is for accessibility purposes"
+msgstr ""
+
+msgctxt "#30161"
+msgid "Notify user upon refresh"
 msgstr ""
 
 msgctxt "#30402"

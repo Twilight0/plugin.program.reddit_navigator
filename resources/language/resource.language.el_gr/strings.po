@@ -258,8 +258,8 @@ msgid "Activate http server and open link immediately"
 msgstr "Ενεργοποίησε τον http server και άνοιξε τον σύνδεσμο άμεσα"
 
 msgctxt "#30064"
-msgid "If you want to authorize from a different device in your local network, this machine's IP address is: [B]{0}[/B]"
-msgstr "Εάν θέλετε να εγκρίνετε από άλλη συσκευή στο τοπικό σας δίκτυο, η διεύθυνση IP αυτής της συσκευής είναι: [B]{0}[/B]"
+msgid "Cancel"
+msgstr "Ακύρωση"
 
 msgctxt "#30065"
 msgid "You can now return to Kodi"
@@ -322,8 +322,8 @@ msgid "Are you sure you want to revoke stored tokens?"
 msgstr "Είστε σίγουροι ότι επιθυμείτε την ανάκληση των αποθηκευμένων αναγνωριστικών;"
 
 msgctxt "#30080"
-msgid "Open qrcode window and do other actions (advanced)"
-msgstr "Άνοιξε το παράθυρο με κωδικό qr και εκτέλεση επιπλέον ενεργειών (για προχωρημένους)"
+msgid "Obtain QR code (alternative method)"
+msgstr "Λήψη κώδικα QR (εναλλακτική μέθοδος)"
 
 msgctxt "#30081"
 msgid "Enter tokens manually"
@@ -458,16 +458,16 @@ msgid "Read subreddit's description"
 msgstr "Ανάγνωση περιγραφής subreddit"
 
 msgctxt "#30114"
-msgid "Comments threads' appearance"
-msgstr "Τρόπος εμφάνισης νημάτων σχολίων"
+msgid "Wrong username and/or password"
+msgstr "Λανθασμένο όνομα χρήστη ή/και κωδικός"
 
 msgctxt "#30115"
-msgid "Nested"
-msgstr ""
+msgid "Quit"
+msgstr "Έξοδος"
 
 msgctxt "#30116"
-msgid "Flat"
-msgstr "Επίπεδος"
+msgid ""
+msgstr ""
 
 msgctxt "#30117"
 msgid "More..."
@@ -590,8 +590,8 @@ msgid "Please open this link in your web browser to retrieve authorization token
 msgstr "Παρακαλώ ανοίξτε αυτόν τον σύνδεσμο στο παράθυρο του φυλλομετρητή σας για να λάβετε το αναγνωριστικό: [I]{0}[/I]"
 
 msgctxt "#30147"
-msgid "Start server now"
-msgstr "Άμεση εκκίνηση εξυπηρετητή"
+msgid ""
+msgstr ""
 
 msgctxt "#30148"
 msgid "Use custom window for displaying text"
@@ -644,6 +644,10 @@ msgstr "Περισσότερες ενέργειες..."
 msgctxt "#30160"
 msgid "Setting below is for accessibility purposes"
 msgstr "Η παρακάτω ρύθμιση βοηθάει στην προσβασιμότητα"
+
+msgctxt "#30161"
+msgid "Notify user upon refresh"
+msgstr "Ειδοποίησε τον χρήστη κατά την ανανέωση"
 
 msgctxt "#30402"
 msgid "Success"

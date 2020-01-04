@@ -261,7 +261,7 @@ def stream_picker(names, urls):
         popped = urls[choice]
         return popped
     else:
-        return close_all()
+        return control.execute('Dialog.Close(all)')
 
 
 def convert_date(stamp):
