@@ -27,8 +27,6 @@ from .reddit import base_link
 
 def router(link):
 
-    resolveurl.add_plugin_dirs(control.join(control.addonPath, 'resources', 'lib', 'resolvers', 'plugins'))
-
     if link.startswith(('acestream://', 'sop://')):
 
         if 'acestream' in link:
@@ -52,6 +50,26 @@ def router(link):
         resolved = urls[0]['url']
 
         return resolved
+
+    elif 'v.redd.it' in link or 'reddit.com/video' in link:
+
+        if 'reddit.com/video' in link:
+            link = 'https://v.redd.it/' + link.partition('/')[2]
+
+        try:
+
+            dash_on = control.addon_details('inputstream.adaptive').get('enabled')
+
+        except KeyError:
+
+            dash_on = False
+
+        if dash_on:
+            stream = link + '/DASHPlaylist.mpd'
+        else:
+            stream = link + '/HLSPlaylist.m3u8'
+
+        return stream
 
     elif resolveurl.HostedMediaFile(link).valid_url():
 
@@ -269,7 +287,6 @@ def comment_scraper(text, title):
 
             else:
 
-                # play(link, title=title, image=control.addonInfo('icon'))
                 control.execute(
                     'PlayMedia("{0}?action=play&url={1}&title={2}&image={3}")'.format(
                         sysaddon[:-1], link, title, control.addonInfo('icon')

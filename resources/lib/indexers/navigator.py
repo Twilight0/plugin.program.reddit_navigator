@@ -65,25 +65,33 @@ class Main:
                 {
                     'title': modes[0],
                     'action': 'window_activate',
-                    'query': 'video'
+                    'query': 'video',
+                    'isFolder': 'False',
+                    'isPlayable': 'False'
                 }
                 ,
                 {
                     'title': modes[1],
                     'action': 'window_activate',
-                    'query': 'audio'
+                    'query': 'audio',
+                    'isFolder': 'False',
+                    'isPlayable': 'False'
                 }
                 ,
                 {
                     'title': modes[2],
                     'action': 'window_activate',
-                    'query': 'image'
+                    'query': 'image',
+                    'isFolder': 'False',
+                    'isPlayable': 'False'
                 }
                 ,
                 {
                     'title': modes[3],
                     'action': 'tools',
-                    'icon': 'settings_tools.png'
+                    'icon': 'settings_tools.png',
+                    'isFolder': 'False',
+                    'isPlayable': 'False'
                 }
             ]
 
@@ -159,8 +167,14 @@ class Main:
             'boolean': control.setting('show.account') == 'true'
         }
 
+        if control.setting('window.action') == '0':
+
+            for i in self.menu:
+                if i['action'] in ['mode_change', 'search', 'my_account']:
+                    i.update({'isFolder': 'False', 'isPlayable': 'False'})
+
         if len(control.setting('access.token')) > 0:
-            self.menu.insert(5, my_account)
+            self.menu.insert(-2, my_account)
 
         self.list = [i for i in self.menu if i['boolean']]
 
@@ -234,7 +248,11 @@ class Main:
 
     def search(self, media=True, override=False, query=None):
 
-        choices = [control.lang(30003), control.lang(30005), control.lang(30155), control.lang(30010)]
+        if media:
+            choices = [control.lang(30003), control.lang(30005), control.lang(30155), control.lang(30010)]
+        else:
+            choices = [control.lang(30003), control.lang(30005), control.lang(30010)]
+
         if control.setting('history.bool') == 'false':
             del choices[-1]
 
@@ -273,7 +291,7 @@ class Main:
                         choice = control.selectDialog(queries)
 
                         if choice <= len(read_from_history(history_media)) and not choice == -1:
-                            search_link = url_generator(read_from_history(history_media)[choice])
+                            search_link = url_generator(read_from_history(history_media)[choice], history=True)
                         else:
                             control.execute('Dialog.Close(all)')
                             return
@@ -282,7 +300,8 @@ class Main:
 
                         self.list = [
                             {
-                                'title': q, 'url': url_generator(q, history=True), 'action': 'search', 'query': q
+                                'title': q, 'url': url_generator(q, history=True), 'action': 'search', 'query': q,
+                                'isFolder': 'False', 'isPlayable': 'False'
                             } for q in queries
                         ]
 
@@ -307,12 +326,7 @@ class Main:
                     control.execute('Dialog.Close(all)')
                     return
 
-                self.list = self.listing(search_link, return_list=True)
-
-                if active_mode()[1] == 'pictures':
-                    directory.add(self.list, infotype='image')
-                else:
-                    directory.add(self.list)
+                directory.run_builtin(action='listing', url=search_link)
 
             else:
 
@@ -338,7 +352,7 @@ class Main:
                         choice = control.selectDialog(queries)
 
                         if choice <= len(read_from_history(history_media)) and not choice == -1:
-                            search_link = url_generator(read_from_history(history_subrs)[choice], media=False)
+                            search_link = url_generator(read_from_history(history_subrs)[choice], media=False, history=True)
                         else:
                             control.execute('Dialog.Close(all)')
                             return
@@ -348,7 +362,7 @@ class Main:
                         self.list = [
                             {
                                 'title': q, 'url': url_generator(q, media=False, history=True), 'action': 'search',
-                                'query': q
+                                'query': q, 'isFolder': 'False', 'isPlayable': 'False'
                             } for q in queries
                         ]
 
@@ -366,46 +380,50 @@ class Main:
                     control.execute('Dialog.Close(all)')
                     return
 
-                self.list = self.listing(search_link, return_list=True)
+                directory.run_builtin(action='listing', url=search_link)
 
         else:
 
             self.list = [
                 {
-                    'title': choices[0],
+                    'title': control.lang(30003),
                     'action': 'search',
                     'query': 'quick',
                     'url': 'media' if media else 'subreddits'
                 }
-                ,
-                {
-                    'title': choices[1],
-                    'action': 'search',
-                    'query': 'advanced',
-                    'url': 'media'
-                }
-                ,
-                {
-                    'title': choices[2],
-                    'action': 'search',
-                    'query': 'domain',
-                    'url': 'media'
-                }
-                ,
-                {
-                    'title': choices[3],
-                    'action': 'search',
-                    'query': 'history',
-                    'url': 'media' if media else 'subreddits'
-                }
             ]
 
-            if not media:
-                del self.list[1]
-                del self.list[-2]
+            if media:
 
-            if control.setting('history.bool') == 'false':
-                del self.list[-1]
+                self.list.append(
+                    {
+                        'title': control.lang(30005),
+                        'action': 'search',
+                        'query': 'advanced',
+                        'url': 'media'
+                    }
+                )
+
+                self.list.append(
+                    {
+                        'title': control.lang(30155),
+                        'action': 'search',
+                        'query': 'domain',
+                        'url': 'media'
+                    }
+                )
+
+            for i in self.list:
+                i.update({'isFolder': 'False', 'isPlayable': 'False'})
+
+            if control.setting('history.bool') == 'true':
+
+                self.list.append(
+                    {
+                        'title': control.lang(30010), 'action': 'search', 'query': 'history',
+                        'url': 'media' if media else 'subreddits'
+                    }
+                )
 
         directory.add(self.list)
 
@@ -941,7 +959,9 @@ class Main:
             {
                 'title': control.lang(30057 if not access_boolean() else 30058),
                 'action': 'authorize' if not access_boolean() else 'revoke',
-                'icon': 'authorize.png' if not access_boolean() else 'revoke.png'
+                'icon': 'authorize.png' if not access_boolean() else 'revoke.png',
+                'isFolder': 'False',
+                'isPlayable': 'False'
             }
             ,
             {
