@@ -322,7 +322,7 @@ msgid "Are you sure you want to revoke stored tokens?"
 msgstr ""
 
 msgctxt "#30080"
-msgid "Obtain QR code (alternative method)"
+msgid ""
 msgstr ""
 
 msgctxt "#30081"

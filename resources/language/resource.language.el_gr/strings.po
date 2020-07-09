@@ -322,8 +322,8 @@ msgid "Are you sure you want to revoke stored tokens?"
 msgstr "Είστε σίγουροι ότι επιθυμείτε την ανάκληση των αποθηκευμένων αναγνωριστικών;"
 
 msgctxt "#30080"
-msgid "Obtain QR code (alternative method)"
-msgstr "Λήψη κώδικα QR (εναλλακτική μέθοδος)"
+msgid ""
+msgstr ""
 
 msgctxt "#30081"
 msgid "Enter tokens manually"

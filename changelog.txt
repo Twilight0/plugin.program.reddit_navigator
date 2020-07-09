@@ -17,4 +17,5 @@
 - Added a cancellation button and exception handling on wrong username/password
 - Optionally notify user on token refresh, now defaults to off
 - Optionally open the first time prompt (read me)
+- Removed QRcode authorization option
 - Various other minor tweaks

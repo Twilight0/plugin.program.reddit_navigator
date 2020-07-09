@@ -542,7 +542,7 @@ class Main:
 
             author = children_data['author']
             body = legacy_replace(children_data['body'])
-            short = body[:50] + '...'
+            short = legacy_replace(body[:50] + '...')
 
             image = control.addonInfo('icon')
 

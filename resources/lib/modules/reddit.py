@@ -281,56 +281,6 @@ def multisel(subreddits, simple=False):
         return output
 
 
-class QR_display(pyxbmct.AddonDialogWindow):
-
-    pyxbmct.skin.estuary = control.setting('pyxbmct.estuary') == 'true'
-
-    geometry = (542, 286, 6, 2)
-
-    def __init__(self, title):
-
-        super(QR_display, self).__init__(title)
-        self.image = None
-        self.text_box = None
-        self.link_button = None
-        self.close_button = None
-        self.manual_button = None
-        self.server_button = None
-        self.setGeometry(*self.geometry)
-        self.set_controls()
-        self.set_navigation()
-        self.connect(pyxbmct.ACTION_NAV_BACK, self.close)
-
-    def set_controls(self):
-
-        # Image object
-        self.image = pyxbmct.Image(
-            'http://chart.apis.google.com/chart?cht=qr&chl={0}&chs=256'.format(quote(authorization_link())),
-            aspectRatio=2
-        )
-        self.placeControl(self.image, 0, 0, 6)
-        # Button displaying address for auth, and capable of opening it
-        self.link_button = pyxbmct.Button(short_link)
-        self.placeControl(self.link_button, 0, 1)
-        self.connect(self.link_button, lambda: control.open_web_browser(short_link))
-        # Button capable of calling the function to enter the token
-        self.manual_button = pyxbmct.Button(control.lang(30081))
-        self.placeControl(self.manual_button, 2, 1)
-        self.connect(self.manual_button, lambda: manual_auth(tell=False))
-        # Close button
-        self.close_button = pyxbmct.Button(control.lang(30062))
-        self.placeControl(self.close_button, 4, 1)
-        self.connect(self.close_button, self.close)
-
-    def set_navigation(self):
-
-        self.link_button.controlDown(self.manual_button)
-        self.manual_button.controlUp(self.link_button)
-        self.manual_button.controlDown(self.close_button)
-        self.close_button.controlUp(self.manual_button)
-        self.setFocus(self.close_button)
-
-
 def kodi_auth():
 
     aspect_ratio = control.infoLabel('Skin.AspectRatio')
@@ -561,17 +511,9 @@ def authorize():
 
     elif choice == 1:
 
-        window = QR_display(control.name())
-
-        window.doModal()
-
-        del window
-
-    elif choice == 2:
-
         kodi_auth()
 
-    elif choice == 3:
+    elif choice == 2:
 
         manual_auth()
 
