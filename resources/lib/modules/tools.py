@@ -15,10 +15,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import xbmc, socket, json, re, pyxbmct, time
+import socket, json, re, pyxbmct, time
 from tulip import control, client
 from tulip.init import sysaddon
-from tulip.compat import quote, urlparse, urlunparse, range, iteritems, unicode
+from tulip.compat import quote, range, iteritems
 from tulip.log import log_debug
 
 history_media = control.join(control.dataPath, 'history_media')
@@ -266,10 +266,8 @@ def stream_picker(names, urls):
 
 def convert_date(stamp):
 
-    import time
-
-    DATEFORMAT = xbmc.getRegion('dateshort')
-    TIMEFORMAT = xbmc.getRegion('meridiem')
+    DATEFORMAT = control.getregion('dateshort')
+    TIMEFORMAT = control.getregion('meridiem')
 
     date_time = time.localtime(stamp)
 
@@ -300,32 +298,6 @@ def legacy_replace(txt):
         pass
 
     return txt
-
-
-def quote_paths(url):
-
-    """
-    This function will quote paths **only** in a given url
-    :param url: string or unicode
-    :return: joined path string
-    """
-
-    try:
-        if isinstance(url, unicode):
-            url = url.encode('utf-8')
-
-        if url.startswith('http'):
-            parsed = urlparse(url)
-            processed_path = '/'.join([quote(i) for i in parsed.path.split('/')])
-            url = urlunparse(parsed._replace(path=processed_path))
-            return url
-        else:
-            path = '/'.join([quote(i) for i in url.split('/')])
-            return path
-
-    except Exception:
-
-        return url
 
 
 def cm_updater(the_list, url=''):

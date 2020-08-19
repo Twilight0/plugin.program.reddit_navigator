@@ -22,6 +22,7 @@ from tulip import directory, client, bookmarks, cache, control
 from tulip.compat import iteritems, urlparse, urlunparse, urlencode, parse_qsl
 
 
+
 # noinspection PyProtectedMember
 class Main:
 
@@ -433,7 +434,7 @@ class Main:
 
             link = base_link() + link
 
-        link = quote_paths(link)
+        link = client.quote_paths(link)
 
         link = link.replace('old.', 'oauth.' if access_boolean() else 'www.')
         link = link.replace('www.', 'oauth.' if access_boolean() else 'www.')
@@ -556,7 +557,7 @@ class Main:
                 replies_children = reply_json['data']['children']
                 replies = len(replies_children)
                 try:
-                    comprehension = [base_link() + quote_paths(r['data']['permalink']) for r in replies_children]
+                    comprehension = [base_link() + client.quote_paths(r['data']['permalink']) for r in replies_children]
                     replies_urls = json.dumps(comprehension)
                 except KeyError:
                     replies_urls = None
@@ -628,7 +629,7 @@ class Main:
                 'label': label, 'title': title, 'url': url, 'image': image, 'fanart': fanart, 'next': next_url,
                 'subreddit_id': subreddit_id, 'subreddit': subreddit, 'subreddit_url': base_link() + '/r/' + subreddit,
                 'kind': 't3', 'permalink': permalink, 'domain': domain, 'name': name, 'selftext': selftext,
-                'author': author, 'plot': selftext, 'query': quote_paths(permalink)
+                'author': author, 'plot': selftext, 'query': client.quote_paths(permalink)
             }
 
             return pairs

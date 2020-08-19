@@ -2,3 +2,5 @@
 *.pyo
 /.idea
 /.vscode
+
+.env
