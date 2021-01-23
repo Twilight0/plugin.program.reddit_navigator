@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.reddit_navigator" name="Reddit Navigator" version="1.0.7" provider-name="Twilight0">
+<addon id="plugin.program.reddit_navigator" name="Reddit Navigator" version="1.0.8" provider-name="Twilight0">
     <requires>
-        <import addon="xbmc.python" version="2.24.0"/>
-        <import addon="script.module.tulip" version="2.6.14"/>
+        <import addon="xbmc.addon" version="16.1.000"/>
+        <import addon="script.module.tulip" version="2.8.2"/>
         <import addon="script.module.pyxbmct" version="1.2.0"/>
-        <import addon="script.module.resolveurl" version="5.1.0"/>
-        <import addon="plugin.video.youtube" version="6.8.2"/>
+        <import addon="script.module.resolveurl" version="5.1.20"/>
+        <import addon="plugin.video.youtube" version="6.8.8"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="main.py">
         <provides>video audio image executable</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
         <platform>all</platform>
         <summary lang="en_GB">Reddit Navigator addon</summary>
         <summary lang="el_GR">Πρόσθετο Reddit Navigator</summary>
@@ -22,7 +22,7 @@
         <license>GNU GPL, version 2</license>
         <source>https://github.com/Twilight0/plugin.program.reddit_navigator</source>
         <size>1711463</size>
-        <news>1.0.X ~ 05-01-2020
+        <news>1.0.X ~ 05-01-2020 - 19-01-2021
 - Initial Version, forked from Reddit Browser
 - Replaced urlresolver with resolveurl
 - Changed some default settings

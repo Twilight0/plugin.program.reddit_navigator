@@ -1,4 +1,4 @@
-1.0.X ~ 05-01-2020
+1.0.X ~ 05-01-2020 - 19-01-2021
 - Initial Version, forked from Reddit Browser
 - Replaced urlresolver with resolveurl
 - Changed some default settings

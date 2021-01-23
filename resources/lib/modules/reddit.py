@@ -20,7 +20,7 @@ from re import sub as substitute
 from .tools import available_domains, add_to_history, history_subrs, history_media, get_ip
 from tulip import control, client
 from tulip.log import log_debug
-from tulip.compat import quote_plus, BaseHTTPServer, ThreadingMixIn, quote, parse_qsl, urlparse
+from tulip.compat import quote_plus, BaseHTTPServer, ThreadingMixIn, parse_qsl, urlparse
 from .tools import convert_date, saved_subrs, refresh
 
 
