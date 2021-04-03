@@ -18,10 +18,10 @@
 from ..modules.tools import *
 
 from ..modules.reddit import url_generator, base_link, dotjson, request_headers, reddit_url, account_info
-from tulip import directory, client, bookmarks, cache, control
+from tulip import directory, client, bookmarks, cache, control, init
 from tulip.compat import iteritems, urlparse, urlunparse, urlencode, parse_qsl
 
-
+cache_method = cache.FunctionCache().cache_method
 
 # noinspection PyProtectedMember
 class Main:
@@ -30,7 +30,7 @@ class Main:
 
     def __init__(self):
 
-        self.list = []; self.menu = []; self.data = []; self.nested = []
+        self.list = []; self.menu = []; self.data = []; self.nested = []; self.directory = []
 
     def executable(self):
 
@@ -428,6 +428,7 @@ class Main:
 
         directory.add(self.list)
 
+    @cache_method(int(control.setting('cache.size')) * 60)
     def items_list(self, link):
 
         if not link.startswith('http'):
@@ -443,6 +444,8 @@ class Main:
 
         # Pulls images and thumbnails
         def image_generator(children_data):
+
+            print(children_data)
 
             image = control.addonInfo('icon')
             fanart = control.fanart()
@@ -497,6 +500,9 @@ class Main:
                         image = i
                         break
 
+                if '?' in image:
+                    image = image.partition('?')[0]
+
             except (KeyError, IndexError, TypeError):
 
                 pass
@@ -531,6 +537,9 @@ class Main:
                     elif f:
                         fanart = f
                         break
+
+                if '?' in fanart:
+                    fanart = fanart.partition('?')[0]
 
             except (KeyError, IndexError):
 
@@ -586,7 +595,7 @@ class Main:
         # Link/Thread
         def t3_kind(children_data, next_url):
 
-            title = children_data['title']
+            title = client.replaceHTMLCodes(children_data['title'])
             name = children_data['name']
             author = children_data['author']
 
@@ -637,8 +646,8 @@ class Main:
         # Subreddit
         def t5_kind(children_data, next_url):
 
-            display_name = children_data['display_name']
-            title = children_data['title']
+            display_name = client.replaceHTMLCodes(children_data['display_name'])
+            title = client.replaceHTMLCodes(children_data['title'])
             public_description = legacy_replace(children_data['public_description'])
             description = legacy_replace(children_data['description'])
             plot = json.dumps({'title': title, 'public_description': public_description, 'description': description})
@@ -846,6 +855,7 @@ class Main:
 
         return self.list
 
+    @cache_method(int(control.setting('cache.size')) * 60)
     def replies_viewer(self, query):
 
         reply_urls = json.loads(query)
@@ -861,9 +871,9 @@ class Main:
     def listing(self, url=None, return_list=False, query=None):
 
         if url:
-            self.data = cache.get(self.items_list, int(control.setting('cache.size')), url)
+            self.data = self.items_list(url)
         else:
-            self.data = cache.get(self.replies_viewer, int(control.setting('cache.size')), query)
+            self.data = self.replies_viewer(query)
 
         if self.data is None:
 
@@ -881,7 +891,20 @@ class Main:
 
             if active_mode()[1] == 'pictures':
 
-                directory.add(self.menu, infotype='pictures')
+                for i in self.menu:
+                    li = control.item(label=i['title'])
+                    li.setArt(
+                        {
+                            'icon': i['image'], 'poster': i['image'], 'thumb': i['image'],
+                            'fanart': control.addonInfo('fanart')
+                        }
+                    )
+                    li.setInfo('image', {'title': i['title'], 'picturepath': i['url']})
+                    url = i['url']
+                    self.directory.append((url, li, False))
+
+                control.addItems(init.syshandle, self.directory)
+                control.directory(init.syshandle)
 
             else:
 

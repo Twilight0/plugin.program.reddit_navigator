@@ -17,12 +17,11 @@
 
 import json, time, platform, pyxbmct
 from re import sub as substitute
-from .tools import available_domains, add_to_history, history_subrs, history_media, get_ip
+from .tools import available_domains, add_to_history, history_subrs, history_media
 from tulip import control, client
 from tulip.log import log_debug
-from tulip.compat import quote_plus, BaseHTTPServer, ThreadingMixIn, parse_qsl, urlparse
+from tulip.compat import quote_plus, parse_qsl, urlparse
 from .tools import convert_date, saved_subrs, refresh
-
 
 dotjson = '{0}'.format('' if control.setting('access.token') else '.json')
 client_id = 'KoGwnHGiWbZOjw'
@@ -30,7 +29,6 @@ state = 'redditnavigator'
 
 redirect_uri = 'http://{0}:{1}/'.format('127.0.0.1', '50201')
 scope = ['identity', 'read', 'mysubreddits', 'save', 'history', 'subscribe']
-short_link = 'https://is.gd/rn_standard_auth' if control.setting('compact.page') == 'false' else 'https://is.gd/rn_compact_auth'
 
 
 def user_agent():
@@ -389,8 +387,13 @@ def kodi_auth():
             self.password_label = pyxbmct.Label(control.lang(30153))
             self.placeControl(self.password_label, 2, 0)
             # Password input
-            self.pass_input = pyxbmct.Edit(control.lang(30153), isPassword=True)
-            self.placeControl(self.pass_input, 3, 0)
+            if control.kodi_version() >= 18.0:
+                self.pass_input = pyxbmct.Edit(control.lang(30153))
+                self.placeControl(self.pass_input, 3, 0)
+                self.pass_input.setType(6, control.lang(30153))
+            else:
+                self.pass_input = pyxbmct.Edit(control.lang(30153), isPassword=True)
+                self.placeControl(self.pass_input, 3, 0)
             # Submit button
             self.submit_button = pyxbmct.Button(control.lang(30154))
             self.placeControl(self.submit_button, 4, 0)
@@ -465,61 +468,13 @@ def kodi_auth():
         control.okDialog(control.name(), control.lang(30114))
 
 
-def ip_address_set():
-
-    yesno = control.yesnoDialog(control.lang(30060), yeslabel='127.0.0.1', nolabel=get_ip())
-
-    if yesno:
-
-        control.setSetting('ip.address', '127.0.0.1')
-
-    else:
-
-        control.setSetting('ip.address', get_ip())
-
-
-def manual_auth(tell=True):
-
-    if tell:
-        control.okDialog(control.name(), control.lang(30146).format(short_link))
-
-    if control.setting('ip.address') == '0.0.0.0':
-        ip_address_set()
-
-    auth_token = control.dialog.input(heading=control.lang(30082))
-
-    if not auth_token:
-        control.okDialog(control.name(), control.lang(30083))
-        return
-    else:
-        control.setSetting('auth.token', auth_token)
-        get_tokens(code=auth_token)
-
-
 def authorize():
 
     control.setSetting('get.toggle', 'true')
 
-    choices = [control.lang(30063), control.lang(30080), control.lang(30149), control.lang(30081)]
-
-    choice = control.selectDialog(choices, control.lang(30061))
-
-    if choice == 0:
-
-        control.open_web_browser(authorization_link())
-        reddit_server()
-
-    elif choice == 1:
-
-        kodi_auth()
-
-    elif choice == 2:
-
-        manual_auth()
-
-    if choice != -1:
-        control.sleep(200)
-        control.refresh()
+    kodi_auth()
+    control.sleep(200)
+    control.refresh()
 
 
 def account_info():
@@ -617,96 +572,3 @@ def revoke():
 
         control.sleep(200)
         control.refresh()
-
-
-def reddit_page(authorized=False, token=''):
-
-    auth_page = """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-    <head>
-        <title>{name}</title>
-    </head>
-    <body>
-        <div style="text-align: center;">
-            <h1>{name}, {version}</h1>
-            {line1}!<br>
-            {token}<br>
-            {line2}
-        </div>
-    </body>
-</html>
-    """
-
-    if authorized:
-        html = auth_page.format(
-            name=control.name(),
-            version=control.lang(30070).format(control.version()).encode('utf-8'),
-            token=control.lang(30069).format(token).encode('utf-8'),
-            line1=control.lang(30402).encode('utf-8'),
-            line2=control.lang(30065).encode('utf-8')
-        )
-    else:
-        html = auth_page.format(
-            name=control.name(),
-            version=control.lang(30070).format(control.version()).encode('utf-8'),
-            token='',
-            line1=control.lang(30067).encode('utf-8'),
-            line2=control.lang(30068).encode('utf-8')
-        )
-
-    return html
-
-
-class BaseServer(BaseHTTPServer.BaseHTTPRequestHandler):
-
-    def log_message(self, *args):
-        pass
-
-    def _set_headers(self):
-
-        self.send_response(200)
-        self.send_header('Content-type', 'text/html; charset=utf-8')
-        self.end_headers()
-
-    def do_GET(self):
-
-        parsed = urlparse(self.path)
-        params = dict(parse_qsl(parsed.query))
-
-        self._set_headers()
-        self.wfile.write(reddit_page(authorized='code' in params, token=params.get('code', '')))
-
-        if 'code' in params:
-            control.setSetting('auth.token', params['code'])
-            get_tokens(code=params['code'])
-        elif 'error' in params:
-            control.setSetting('get.toggle', 'false')
-            tokens_reset()
-
-    def do_HEAD(self):
-
-        self._set_headers()
-
-
-class ThreadedServer(ThreadingMixIn, BaseHTTPServer.HTTPServer):
-
-    allow_reuse_address = True
-
-
-def reddit_server():
-
-    if control.setting('debugging.toggle') == 'true':
-        log_debug('Starting http server')
-
-    ip_address = control.setting('ip.address')
-
-    if ip_address == '0.0.0.0':
-        ip_address = '127.0.0.1'
-
-    server = ThreadedServer((ip_address, int(control.setting('ip.port'))), BaseServer)
-
-    server.handle_request()
-
-    if control.setting('debugging.toggle') == 'true':
-        log_debug('Stopped http server')

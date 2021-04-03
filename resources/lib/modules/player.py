@@ -27,16 +27,7 @@ from .reddit import base_link
 
 def router(link):
 
-    if link.startswith(('acestream://', 'sop://')):
-
-        if 'acestream' in link:
-            stream = 'plugin://program.plexus/?url={0}&mode=1'.format(link.partition('://')[2])
-        else:
-            stream = 'plugin://program.plexus/?url={0}&mode=2'.format(link)
-
-        return stream
-
-    elif 'youtu' in link:
+    if 'youtu' in link:
 
         yt_mpd_enabled = control.addon(id='plugin.video.youtube').getSetting('kodion.video.quality.mpd') == 'true'
 

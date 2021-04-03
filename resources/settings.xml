@@ -19,11 +19,6 @@
         <setting id="cache.size" type="slider" label="30013" default="6" range="1,1,48" option="int"/>
     </category>
     <category label="30048">
-        <setting label="30056" type="action" action="RunPlugin(plugin://$ID/?action=ip_address_set)" option="close"/>
-        <setting id="ip.address" type="ipaddress" label="30017" default="0.0.0.0"/>
-        <setting id="ip.port" type="number" label="30047" default="50201"/>
-        <setting type="sep"/>
-        <setting id="compact.page" label="30085" type="bool" default="true"/>
         <setting id="auto.refresh" label="30087" type="bool" default="true"/>
         <setting id="notify.refresh" label="30161" type="bool" default="false" enable="eq(-1,true)"/>
         <setting type="sep"/>

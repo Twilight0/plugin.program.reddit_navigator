@@ -216,11 +216,6 @@ elif action == 'delete_history':
     from resources.lib.modules.tools import deletion
     deletion()
 
-elif action == 'install_plexus':
-
-    from resources.lib.modules.tools import install_plexus
-    install_plexus()
-
 elif action == 'authorize':
 
     from resources.lib.modules.reddit import authorize
@@ -249,7 +244,7 @@ elif action == 'ip_address_set':
 elif action == 'clear_cache':
 
     from tulip import cache
-    cache.clear(withyes=False)
+    cache.FunctionCache().reset_cache(notify=True)
 
 elif action == 'debugging_toggle':
 
